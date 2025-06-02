@@ -24,3 +24,12 @@ def load_label(filename):
 
 def encode_target_label(Y, target):
     return (Y == target).astype(int)
+
+
+def one_hot_encode(Y):
+    n_labels = Y.shape[0]
+    encoded_Y = np.zeros((n_labels, 10))
+    for i in range(n_labels):
+        label = Y[i]
+        encoded_Y[i][label] = 1
+    return encoded_Y
