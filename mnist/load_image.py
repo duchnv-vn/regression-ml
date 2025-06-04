@@ -26,9 +26,9 @@ def encode_target_label(Y, target):
     return (Y == target).astype(int)
 
 
-def one_hot_encode(Y):
+def one_hot_encode(Y, class_number):
     n_labels = Y.shape[0]
-    encoded_Y = np.zeros((n_labels, 10))
+    encoded_Y = np.zeros((n_labels, class_number))
     for i in range(n_labels):
         label = Y[i]
         encoded_Y[i][label] = 1
