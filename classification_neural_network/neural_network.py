@@ -17,11 +17,10 @@ def softmax(logit):
 
 def forward(X, w1, w2):
     h = sigmoid(np.matmul(prepend_bias(X), w1))
-    y_hat = softmax(np.matmul(prepend_bias(h), w2))
-    return y_hat
+    return softmax(np.matmul(prepend_bias(h), w2))
 
 
-def loss(Y, y_hat):
+def cross_entropy_loss(Y, y_hat):
     return -np.sum(Y * np.log(y_hat)) / Y.shape[0]
 
 
@@ -33,7 +32,7 @@ def classify(X, w1, w2):
 
 def report(iteration, X_train, Y_train, X_test, Y_test, w1, w2):
     y_hat = forward(X_train, w1, w2)
-    training_loss = loss(Y_train, y_hat)
+    training_loss = cross_entropy_loss(Y_train, y_hat)
     classifications = classify(X_test, w1, w2)
     accuracy = np.average(classifications == Y_test) * 100.0
     print("Iteration: %5d, Loss: %.6f, Accuracy: %.2f%%" %
